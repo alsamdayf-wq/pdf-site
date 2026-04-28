@@ -1,0 +1,478 @@
+﻿<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ملفات PDF</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-1: #090b12;
+      --bg-2: #11172a;
+      --glass: rgba(255, 255, 255, 0.08);
+      --glass-border: rgba(255, 255, 255, 0.18);
+      --text: #eef3ff;
+      --muted: #b7c0d8;
+      --accent: #54b3ff;
+      --accent-2: #7af0ff;
+      --success-1: #35d1a5;
+      --success-2: #2f7dff;
+      --shadow: 0 20px 45px rgba(0, 0, 0, 0.45);
+      --radius-xl: 24px;
+      --radius-lg: 18px;
+      --radius-md: 14px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: "Cairo", sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(1000px 600px at 90% -10%, #1f2f63 0%, transparent 60%),
+        radial-gradient(900px 550px at -10% 110%, #0e4f6e 0%, transparent 60%),
+        linear-gradient(145deg, var(--bg-1), var(--bg-2));
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      padding: 40px 18px;
+      overflow-x: hidden;
+    }
+
+    .page {
+      width: min(1100px, 100%);
+      animation: fadeUp 900ms ease both;
+    }
+
+    .hero {
+      background: var(--glass);
+      border: 1px solid var(--glass-border);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border-radius: var(--radius-xl);
+      box-shadow: var(--shadow);
+      padding: 28px 26px;
+      margin-bottom: 22px;
+    }
+
+    .title {
+      margin: 0;
+      font-size: clamp(1.4rem, 3vw, 2rem);
+      line-height: 1.5;
+      font-weight: 800;
+      letter-spacing: 0.2px;
+    }
+
+    .subtitle {
+      margin: 6px 0 0;
+      color: var(--muted);
+      font-size: clamp(0.95rem, 2vw, 1.05rem);
+      font-weight: 600;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+      margin-bottom: 22px;
+    }
+
+    .card {
+      background: var(--glass);
+      border: 1px solid var(--glass-border);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow);
+      padding: 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      transition: transform 280ms ease, box-shadow 280ms ease, border-color 280ms ease;
+      animation: fadeIn 600ms ease both;
+    }
+
+    .card:hover {
+      transform: translateY(-4px) scale(1.015);
+      border-color: rgba(122, 240, 255, 0.55);
+      box-shadow: 0 16px 36px rgba(84, 179, 255, 0.18), 0 25px 48px rgba(0, 0, 0, 0.42);
+    }
+
+    .file-head {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .pdf-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(150deg, #ff5568, #b3192d);
+      box-shadow: 0 8px 20px rgba(220, 58, 74, 0.35);
+      flex: 0 0 auto;
+    }
+
+    .pdf-icon svg {
+      width: 24px;
+      height: 24px;
+      fill: #fff;
+    }
+
+    .file-name {
+      margin: 0;
+      font-size: 1rem;
+      font-weight: 700;
+      line-height: 1.5;
+    }
+
+    .actions {
+      display: flex;
+      gap: 10px;
+      margin-top: auto;
+    }
+
+    .btn {
+      border: none;
+      border-radius: 12px;
+      padding: 10px 14px;
+      font-family: inherit;
+      font-size: 0.95rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 220ms ease;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      flex: 1;
+    }
+
+    .btn-open {
+      color: #071321;
+      background: linear-gradient(135deg, var(--accent-2), var(--accent));
+    }
+
+    .btn-open:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 22px rgba(84, 179, 255, 0.35);
+    }
+
+    .btn-download {
+      color: var(--text);
+      background: rgba(255, 255, 255, 0.11);
+      border: 1px solid rgba(255, 255, 255, 0.16);
+    }
+
+    .btn-download:hover {
+      background: rgba(255, 255, 255, 0.18);
+      transform: translateY(-2px);
+    }
+
+    .qr-card {
+      background: var(--glass);
+      border: 1px solid var(--glass-border);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow);
+      padding: 18px;
+      margin-bottom: 18px;
+      text-align: center;
+    }
+
+    .qr-title {
+      margin: 0 0 12px;
+      font-size: 1rem;
+      font-weight: 800;
+      color: var(--text);
+    }
+
+    #qrcode {
+      width: 164px;
+      height: 164px;
+      margin: 0 auto;
+      padding: 10px;
+      border-radius: 14px;
+      background: rgba(255, 255, 255, 0.94);
+      box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.08);
+    }
+
+    .link-wrap {
+      display: flex;
+      justify-content: center;
+      margin-top: 10px;
+    }
+
+    .maps-btn {
+      border: none;
+      text-decoration: none;
+      color: #fff;
+      font-weight: 800;
+      font-size: 1rem;
+      padding: 13px 26px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, var(--success-1), var(--success-2));
+      box-shadow: 0 12px 30px rgba(50, 138, 238, 0.32);
+      transition: transform 220ms ease, box-shadow 220ms ease, filter 220ms ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .maps-btn::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(120deg, transparent 20%, rgba(255, 255, 255, 0.25), transparent 80%);
+      transform: translateX(-120%);
+      transition: transform 420ms ease;
+    }
+
+    .maps-btn:hover {
+      transform: translateY(-3px) scale(1.02);
+      box-shadow: 0 16px 36px rgba(50, 138, 238, 0.42);
+      filter: saturate(1.08);
+    }
+
+    .maps-btn:hover::after {
+      transform: translateX(120%);
+    }
+
+    .modal {
+      position: fixed;
+      inset: 0;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      background: rgba(5, 8, 16, 0.76);
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
+      z-index: 999;
+    }
+
+    .modal.show {
+      display: flex;
+      animation: fadeIn 260ms ease both;
+    }
+
+    .modal-dialog {
+      width: min(980px, 100%);
+      height: min(88vh, 860px);
+      background: rgba(10, 16, 30, 0.92);
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      border-radius: 20px;
+      box-shadow: 0 28px 60px rgba(0, 0, 0, 0.55);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transform: translateY(8px) scale(0.99);
+      animation: modalPop 280ms ease forwards;
+    }
+
+    .modal-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 14px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+      background: rgba(255, 255, 255, 0.04);
+    }
+
+    .modal-title {
+      margin: 0;
+      font-size: 1rem;
+      font-weight: 800;
+      color: #eaf1ff;
+    }
+
+    .close-btn {
+      border: none;
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      background: rgba(255, 255, 255, 0.12);
+      color: #fff;
+      font-size: 1.2rem;
+      cursor: pointer;
+      transition: background 180ms ease, transform 180ms ease;
+    }
+
+    .close-btn:hover {
+      background: rgba(255, 255, 255, 0.2);
+      transform: rotate(90deg);
+    }
+
+    .pdf-frame {
+      width: 100%;
+      height: 100%;
+      border: 0;
+      background: #121212;
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(18px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes modalPop {
+      from { opacity: 0; transform: translateY(12px) scale(0.98); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    @media (max-width: 640px) {
+      body {
+        padding: 18px 12px;
+      }
+
+      .hero,
+      .card,
+      .qr-card {
+        border-radius: 16px;
+      }
+
+      .actions {
+        flex-direction: column;
+      }
+
+      #qrcode {
+        width: 146px;
+        height: 146px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <section class="hero">
+      <h1 class="title">مستندات PDF</h1>
+      <p class="subtitle">عرض وتحميل الملفات بشكل مباشر</p>
+    </section>
+
+    <section class="grid" id="filesGrid"></section>
+
+    <section class="qr-card">
+      <h2 class="qr-title">امسح الكود لفتح الصفحة</h2>
+      <div id="qrcode" aria-label="QR Code"></div>
+    </section>
+
+    <div class="link-wrap">
+      <a
+        class="maps-btn"
+        href="https://maps.app.goo.gl/n8zLup2vWPxqomma6?g_st=ac"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        فتح الموقع
+      </a>
+    </div>
+  </main>
+
+  <div class="modal" id="pdfModal" aria-hidden="true">
+    <div class="modal-dialog" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+      <div class="modal-head">
+        <h3 class="modal-title" id="modalTitle">عرض الملف</h3>
+        <button type="button" class="close-btn" id="closeModal" aria-label="إغلاق">×</button>
+      </div>
+      <iframe class="pdf-frame" id="pdfFrame" title="PDF Viewer"></iframe>
+    </div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+  <script>
+    const files = [
+      { id: 1, name: "رخصة نشاط تجاري", path: "Opdf/1.pdf" },
+      { id: 2, name: "شهادة سجل تجاري", path: "Opdf/2.pdf" },
+      { id: 3, name: "شهادة الضريبه", path: "Opdf/3.pdf" },
+      { id: 4, name: "إثبات عنوان", path: "Opdf/4.pdf" },
+      { id: 5, name: "هوية المالك", path: "Opdf/5.pdf" }
+    ];
+
+    const filesGrid = document.getElementById("filesGrid");
+    const modal = document.getElementById("pdfModal");
+    const modalTitle = document.getElementById("modalTitle");
+    const pdfFrame = document.getElementById("pdfFrame");
+    const closeModalBtn = document.getElementById("closeModal");
+
+    const pdfIcon = `
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M6 2h8l4 4v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2zm7 1.5V7h3.5L13 3.5zM8.5 17h1.7c1.4 0 2.3-.8 2.3-2s-.9-2-2.3-2H8.5v4zm1.5-1.2v-1.6h.2c.7 0 1.1.3 1.1.8s-.4.8-1.1.8H10zm3.2 1.2h1.4v-1.3h.9c1.1 0 1.8-.6 1.8-1.6s-.7-1.6-1.8-1.6h-2.3V17zm1.4-2.4v-.9h.7c.4 0 .7.2.7.4 0 .3-.3.5-.7.5h-.7z"/>
+      </svg>
+    `;
+
+    files.forEach((file, idx) => {
+      const card = document.createElement("article");
+      card.className = "card";
+      card.style.animationDelay = `${idx * 90}ms`;
+
+      card.innerHTML = `
+        <div class="file-head">
+          <span class="pdf-icon">${pdfIcon}</span>
+          <h3 class="file-name">${file.name}</h3>
+        </div>
+        <div class="actions">
+          <button class="btn btn-open" type="button" data-file="${file.path}" data-name="${file.name}">فتح</button>
+          <a class="btn btn-download" href="${file.path}" download>تحميل</a>
+        </div>
+      `;
+
+      filesGrid.appendChild(card);
+    });
+
+    filesGrid.addEventListener("click", (event) => {
+      const openBtn = event.target.closest(".btn-open");
+      if (!openBtn) return;
+
+      const filePath = openBtn.getAttribute("data-file");
+      const fileName = openBtn.getAttribute("data-name");
+      modalTitle.textContent = fileName;
+      pdfFrame.src = filePath;
+      modal.classList.add("show");
+      modal.setAttribute("aria-hidden", "false");
+      document.body.style.overflow = "hidden";
+    });
+
+    function closeModal() {
+      modal.classList.remove("show");
+      modal.setAttribute("aria-hidden", "true");
+      pdfFrame.src = "";
+      document.body.style.overflow = "";
+    }
+
+    closeModalBtn.addEventListener("click", closeModal);
+
+    modal.addEventListener("click", (event) => {
+      if (event.target === modal) closeModal();
+    });
+
+    window.addEventListener("keydown", (event) => {
+      if (event.key === "Escape" && modal.classList.contains("show")) {
+        closeModal();
+      }
+    });
+
+    new QRCode(document.getElementById("qrcode"), {
+      text: window.location.href,
+      width: 144,
+      height: 144,
+      colorDark: "#0a0a0a",
+      colorLight: "#ffffff",
+      correctLevel: QRCode.CorrectLevel.H
+    });
+  </script>
+</body>
+</html>
