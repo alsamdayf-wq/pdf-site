@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="مركز مستندات رسمي لعرض وتحميل الوثائق بصيغة PDF." />
+  <meta name="theme-color" content="#080B12" />
+  <title>مركز المستندات | الوثائق الرسمية</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="icon" type="image/svg+xml" href="assets/icons/document-mark.svg" />
+  <link rel="stylesheet" href="s.css">
+
+  <!-- Hero image: ضع صورتك هنا داخل assets/images/hero.jpg -->
+  <style>
+    .brand-hero {
+      position: relative;
+      width: 85%;
+      height:85%;
+     
+      margin: 0 auto 30px;
+      overflow: hidden;
+      border: 1px solid rgba(132, 204, 22, 0.18);
+      border-radius: var(--radius-xl);
+      background: var(--bg-2);
+      box-shadow: 0 28px 90px rgba(0, 0, 0, 0.42);
+      isolation: isolate;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      align-items: center;
+    }
+
+    .brand-hero::before {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      background:
+        linear-gradient(180deg, rgba(7, 15, 10, 0.02) 45%, var(--bg) 100%),
+        linear-gradient(90deg, rgba(7, 15, 10, 0.24), transparent 28%, transparent 72%, rgba(7, 15, 10, 0.24));
+      content: "";
+      pointer-events: none;
+    }
+
+    .brand-hero::after {
+      position: absolute;
+      inset: 0;
+      z-index: 2;
+      background: radial-gradient(circle at center, transparent 38%, rgba(7, 15, 10, 0.38) 100%);
+      content: "";
+      pointer-events: none;
+    }
+
+    .brand-hero img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 24%;
+      opacity: 0.96;
+      filter: saturate(0.98) contrast(1.02);
+      transform: scale(1.015);
+    }
+
+    .brand-hero-glow {
+      position: absolute;
+      z-index: 3;
+      width: 46%;
+      aspect-ratio: 1;
+      left: 50%;
+      top: 48%;
+      transform: translate(-50%, -50%);
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(132, 204, 22, 0.16), transparent 68%);
+      filter: blur(28px);
+      pointer-events: none;
+    }
+
+  
+
+    @media (max-width: 700px) {
+      .brand-hero {
+        width: calc(100% - 24px);
+        height: 430px;
+        margin-bottom: 22px;
+        border-radius: 22px;
+      }
+
+      .brand-hero img {
+        object-position: center center;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- الصورة الرئيسية: استبدل assets/images/hero.jpg بصورتك 900×1600 -->
+  <section class="brand-hero" aria-label="الهوية البصرية للموقع">
+    <img src="IMG-20260723-WA0017.jpg" alt="الهوية البصرية للموقع" />
+    <span class="brand-hero-glow" aria-hidden="true"></span>
+    <div class="brand-hero-title" >أسواق الراية الذهبية </div>
+  </section>
+
+  <div class="ambient" aria-hidden="true">
+    <span class="light one"></span>
+    <span class="light two"></span>
+    <span class="light three"></span>
+    <span class="particle" style="--x: 8%; --duration: 16s; --delay: -2s"></span>
+    <span class="particle" style="--x: 18%; --duration: 20s; --delay: -8s"></span>
+    <span class="particle" style="--x: 32%; --duration: 18s; --delay: -12s"></span>
+    <span class="particle" style="--x: 47%; --duration: 22s; --delay: -5s"></span>
+    <span class="particle" style="--x: 64%; --duration: 19s; --delay: -10s"></span>
+    <span class="particle" style="--x: 76%; --duration: 23s; --delay: -14s"></span>
+    <span class="particle" style="--x: 91%; --duration: 17s; --delay: -7s"></span>
+  </div>
+
+  <main class="shell">
+   
+    <section aria-labelledby="documents-heading">
+      <div class="section-top">
+        <div>
+          <h2 id="documents-heading" class="section-title">الوثائق المتاحة</h2>
+          <p class="section-note">
+            اختر مستندًا لعرضه مباشرة .
+          
+          </p>
+        </div>
+        <span class="status-pill">متاحة الآن</span>
+      </div>
+
+      <div class="grid" id="documentsGrid"></div>
+    </section>
+
+    <section class="bottom-panel" aria-label="روابط إضافية">
+      <article class="cta">
+        <div class="cta-copy">
+          <h2>الوصول إلى الموقع</h2>
+          <p>افتح رابط الموقع الخارجي مباشرة من البوابة.</p>
+        </div>
+        <a class="map-button" href="https://maps.app.goo.gl/n8zLup2vWPxqomma6?g_st=ac" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M12 21s7-4.9 7-11a7 7 0 1 0-14 0c0 6.1 7 11 7 11Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+            <path d="M12 12.5a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5Z" stroke="currentColor" stroke-width="2"/>
+          </svg>
+          <span>فتح الموقع</span>
+        </a>
+      </article>
+
+   
+  </main>
+
+  <div class="modal" id="viewerModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="modal-shell">
+      <div class="modal-header">
+        <div class="modal-title-wrap">
+          <span class="modal-kicker">معاينة المستند</span>
+          <span class="modal-title" id="modalTitle"></span>
+        </div>
+        <div class="modal-actions">
+          <a class="icon-button" id="modalDownload" href="Opdf/1.pdf" download="1.pdf" title="تحميل" aria-label="تحميل">
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M12 3v12m0 0 5-5m-5 5-5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M5 21h14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+          </a>
+          <button class="icon-button" type="button" id="closeModal" title="إغلاق" aria-label="إغلاق">
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="m6 6 12 12M18 6 6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+      <div class="viewer">
+        <div class="viewer-loading" id="viewerLoading">جاري فتح المستند...</div>
+        <iframe id="pdfFrame" title="عارض PDF"></iframe>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js" integrity="sha512-MgH48mJSlRUCvv1IvuH7S3PaN/YnOLafuPPIYJrKnlvH2YgVYwVexwcW1PN0LXWoUMEqUfrv31Gc1iN1tmRj2w==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script>
+    const documents = [
+      { number: "01", title: "رخصة نشاط تجاري", file: "Opdf/1.pdf" },
+      { number: "02", title: "شهادة سجل تجاري", file: "Opdf/2.pdf" },
+      { number: "03", title: "شهادة الضريبة", file: "Opdf/3.pdf" },
+      { number: "04", title: "إثبات عنوان", file: "Opdf/4.pdf" },
+      { number: "05", title: "هوية المالك", file: "Opdf/5.pdf" }
+    ];
+
+    const grid = document.getElementById("documentsGrid");
+    const modal = document.getElementById("viewerModal");
+    const modalTitle = document.getElementById("modalTitle");
+    const modalDownload = document.getElementById("modalDownload");
+    const pdfFrame = document.getElementById("pdfFrame");
+    const closeModalButton = document.getElementById("closeModal");
+    const viewerLoading = document.getElementById("viewerLoading");
+    let lastFocusedElement = null;
+
+    const iconOpen = `
+      <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+        <path d="M14 3h7v7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M10 14 21 3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        <path d="M21 14v5a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+      </svg>`;
+
+    const iconDownload = `
+      <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+        <path d="M12 3v12m0 0 5-5m-5 5-5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M5 21h14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+      </svg>`;
+
+    function createDocumentCard(doc, index) {
+      const card = document.createElement("article");
+      card.className = "doc-card";
+      card.style.setProperty("--i", index);
+      card.innerHTML = `
+        <div class="card-inner">
+          <div>
+            <div class="doc-top">
+              <div class="pdf-icon" aria-hidden="true">PDF</div>
+              </div>
+            <h3 class="doc-title">${doc.title}</h3>
+            <div class="doc-meta">وثيقة رسمية بصيغة PDF</div>
+          </div>
+          <div class="actions">
+            <button class="btn btn-primary" type="button" data-open="${index}">
+              ${iconOpen}
+              <span>فتح</span>
+            </button>
+            <a class="btn btn-secondary" href="${doc.file}" download>
+              ${iconDownload}
+              <span>تحميل</span>
+            </a>
+          </div>
+        </div>
+      `;
+      return card;
+    }
+
+    documents.forEach((doc, index) => {
+      grid.appendChild(createDocumentCard(doc, index));
+    });
+
+    function openViewer(doc) {
+      lastFocusedElement = document.activeElement;
+      modalTitle.textContent = doc.title;
+      modalDownload.href = doc.file;
+      modalDownload.download = doc.file.split("/").pop();
+      viewerLoading.style.opacity = "1";
+      pdfFrame.src = `${doc.file}#view=FitH`;
+      modal.classList.add("is-open");
+      document.body.style.overflow = "hidden";
+      closeModalButton.focus({ preventScroll: true });
+    }
+
+    function closeViewer() {
+      modal.classList.remove("is-open");
+      document.body.style.overflow = "";
+      window.setTimeout(() => {
+        pdfFrame.src = "";
+        if (lastFocusedElement) {
+          lastFocusedElement.focus({ preventScroll: true });
+        }
+      }, 220);
+    }
+
+    grid.addEventListener("click", (event) => {
+      const trigger = event.target.closest("[data-open]");
+      if (!trigger) return;
+      const doc = documents[Number(trigger.dataset.open)];
+      openViewer(doc);
+    });
+
+    closeModalButton.addEventListener("click", closeViewer);
+
+    modal.addEventListener("click", (event) => {
+      if (event.target === modal) {
+        closeViewer();
+      }
+    });
+
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape" && modal.classList.contains("is-open")) {
+        closeViewer();
+      }
+    });
+
+    pdfFrame.addEventListener("load", () => {
+      viewerLoading.style.opacity = "0";
+    });
+
+    function renderFallbackQr(container, text) {
+      const tables = [
+        { version: 1, data: 19, ec: 7, blocks: [19], align: [] },
+        { version: 2, data: 34, ec: 10, blocks: [34], align: [6, 18] },
+        { version: 3, data: 55, ec: 15, blocks: [55], align: [6, 22] },
+        { version: 4, data: 80, ec: 20, blocks: [80], align: [6, 26] },
+        { version: 5, data: 108, ec: 26, blocks: [108], align: [6, 30] },
+        { version: 6, data: 136, ec: 18, blocks: [68, 68], align: [6, 34] },
+        { version: 7, data: 156, ec: 20, blocks: [78, 78], align: [6, 22, 38] },
+        { version: 8, data: 194, ec: 24, blocks: [97, 97], align: [6, 24, 42] },
+        { version: 9, data: 232, ec: 30, blocks: [116, 116], align: [6, 26, 46] },
+        { version: 10, data: 274, ec: 18, blocks: [68, 68, 69, 69], align: [6, 28, 50] }
+      ];
+
+      const bytes = Array.from(new TextEncoder().encode(text));
+      const table = tables.find((item) => 4 + (item.version < 10 ? 8 : 16) + bytes.length * 8 <= item.data * 8);
+      if (!table) return;
+
+      const dataBits = [];
+      const appendBits = (value, length) => {
+        for (let i = length - 1; i >= 0; i -= 1) {
+          dataBits.push((value >>> i) & 1);
+        }
+      };
+
+      appendBits(0x4, 4);
+      appendBits(bytes.length, table.version < 10 ? 8 : 16);
+      bytes.forEach((byte) => appendBits(byte, 8));
+
+      const capacity = table.data * 8;
+      for (let i = 0, count = Math.min(4, capacity - dataBits.length); i < count; i += 1) {
+        dataBits.push(0);
+      }
+      while (dataBits.length % 8) dataBits.push(0);
+
+      const dataCodewords = [];
+      for (let i = 0; i < dataBits.length; i += 8) {
+        dataCodewords.push(dataBits.slice(i, i + 8).reduce((value, bit) => (value << 1) | bit, 0));
+      }
+      for (let pad = 0; dataCodewords.length < table.data; pad ^= 1) {
+        dataCodewords.push(pad ? 0x11 : 0xEC);
+      }
+
+      const exp = new Array(512);
+      const log = new Array(256);
+      let value = 1;
+      for (let i = 0; i < 255; i += 1) {
+        exp[i] = value;
+        log[value] = i;
+        value <<= 1;
+        if (value & 0x100) value ^= 0x11D;
+      }
+      for (let i = 255; i < 512; i += 1) exp[i] = exp[i - 255];
+
+      const multiply = (a, b) => (a && b ? exp[log[a] + log[b]] : 0);
+      const divisor = (degree) => {
+        const result = new Array(degree).fill(0);
+        result[degree - 1] = 1;
+        let root = 1;
+        for (let i = 0; i < degree; i += 1) {
+          for (let j = 0; j < degree; j += 1) {
+            result[j] = multiply(result[j], root);
+            if (j + 1 < degree) result[j] ^= result[j + 1];
+          }
+          root = multiply(root, 0x02);
+        }
+        return result;
+      };
+      const remainder = (data, generator) => {
+        const result = new Array(generator.length).fill(0);
+        data.forEach((byte) => {
+          const factor = byte ^ result.shift();
+          result.push(0);
+          generator.forEach((coef, index) => {
+            result[index] ^= multiply(coef, factor);
+          });
+        });
+        return result;
+      };
+
+      const generator = divisor(table.ec);
+      const blocks = [];
+      let offset = 0;
+      table.blocks.forEach((length) => {
+        const data = dataCodewords.slice(offset, offset + length);
+        blocks.push({ data, ec: remainder(data, generator) });
+        offset += length;
+      });
+
+      const codewords = [];
+      const maxData = Math.max(...blocks.map((block) => block.data.length));
+      for (let i = 0; i < maxData; i += 1) {
+        blocks.forEach((block) => {
+          if (i < block.data.length) codewords.push(block.data[i]);
+        });
+      }
+      for (let i = 0; i < table.ec; i += 1) {
+        blocks.forEach((block) => codewords.push(block.ec[i]));
+      }
+
+      const size = table.version * 4 + 17;
+      const modules = Array.from({ length: size }, () => Array(size).fill(false));
+      const reserved = Array.from({ length: size }, () => Array(size).fill(false));
+      const set = (x, y, dark, reserve = true) => {
+        if (x < 0 || y < 0 || x >= size || y >= size) return;
+        modules[y][x] = dark;
+        if (reserve) reserved[y][x] = true;
+      };
+      const reserve = (x, y) => {
+        if (x >= 0 && y >= 0 && x < size && y < size) reserved[y][x] = true;
+      };
+
+      const finder = (x, y) => {
+        for (let dy = -1; dy <= 7; dy += 1) {
+          for (let dx = -1; dx <= 7; dx += 1) {
+            const xx = x + dx;
+            const yy = y + dy;
+            const dark = dx >= 0 && dx <= 6 && dy >= 0 && dy <= 6 &&
+              (dx === 0 || dx === 6 || dy === 0 || dy === 6 || (dx >= 2 && dx <= 4 && dy >= 2 && dy <= 4));
+            set(xx, yy, dark);
+          }
+        }
+      };
+
+      finder(0, 0);
+      finder(size - 7, 0);
+      finder(0, size - 7);
+
+      for (let i = 8; i < size - 8; i += 1) {
+        set(i, 6, i % 2 === 0);
+        set(6, i, i % 2 === 0);
+      }
+
+      table.align.forEach((cy) => {
+        table.align.forEach((cx) => {
+          if ((cx === 6 && cy === 6) || (cx === 6 && cy === size - 7) || (cx === size - 7 && cy === 6)) return;
+          for (let dy = -2; dy <= 2; dy += 1) {
+            for (let dx = -2; dx <= 2; dx += 1) {
+              set(cx + dx, cy + dy, Math.max(Math.abs(dx), Math.abs(dy)) !== 1);
+            }
+          }
+        });
+      });
+
+      const formatCoords = [];
+      for (let i = 0; i <= 5; i += 1) formatCoords.push([8, i]);
+      formatCoords.push([8, 7], [8, 8], [7, 8]);
+      for (let i = 9; i < 15; i += 1) formatCoords.push([14 - i, 8]);
+      for (let i = 0; i < 8; i += 1) formatCoords.push([size - 1 - i, 8]);
+      for (let i = 8; i < 15; i += 1) formatCoords.push([8, size - 15 + i]);
+      formatCoords.push([8, size - 8]);
+      formatCoords.forEach(([x, y]) => reserve(x, y));
+
+      if (table.version >= 7) {
+        for (let i = 0; i < 18; i += 1) {
+          reserve(size - 11 + (i % 3), Math.floor(i / 3));
+          reserve(Math.floor(i / 3), size - 11 + (i % 3));
+        }
+      }
+
+      const allBits = codewords.flatMap((byte) => Array.from({ length: 8 }, (_, index) => (byte >>> (7 - index)) & 1));
+      let bitIndex = 0;
+      for (let right = size - 1; right >= 1; right -= 2) {
+        if (right === 6) right = 5;
+        for (let vertical = 0; vertical < size; vertical += 1) {
+          const y = ((right + 1) & 2) === 0 ? size - 1 - vertical : vertical;
+          for (let j = 0; j < 2; j += 1) {
+            const x = right - j;
+            if (!reserved[y][x]) {
+              modules[y][x] = Boolean(allBits[bitIndex] || 0);
+              bitIndex += 1;
+            }
+          }
+        }
+      }
+
+      const bit = (number, index) => ((number >>> index) & 1) !== 0;
+      const formatBits = (mask) => {
+        let data = (1 << 3) | mask;
+        let rem = data;
+        for (let i = 0; i < 10; i += 1) {
+          rem = (rem << 1) ^ (((rem >>> 9) & 1) * 0x537);
+        }
+        return ((data << 10) | rem) ^ 0x5412;
+      };
+      const versionBits = () => {
+        let rem = table.version;
+        for (let i = 0; i < 12; i += 1) {
+          rem = (rem << 1) ^ (((rem >>> 11) & 1) * 0x1F25);
+        }
+        return (table.version << 12) | rem;
+      };
+      const placeFormat = (matrix, mask) => {
+        const bits = formatBits(mask);
+        for (let i = 0; i <= 5; i += 1) matrix[i][8] = bit(bits, i);
+        matrix[7][8] = bit(bits, 6);
+        matrix[8][8] = bit(bits, 7);
+        matrix[8][7] = bit(bits, 8);
+        for (let i = 9; i < 15; i += 1) matrix[8][14 - i] = bit(bits, i);
+        for (let i = 0; i < 8; i += 1) matrix[8][size - 1 - i] = bit(bits, i);
+        for (let i = 8; i < 15; i += 1) matrix[size - 15 + i][8] = bit(bits, i);
+        matrix[size - 8][8] = true;
+      };
+      const placeVersion = (matrix) => {
+        if (table.version < 7) return;
+        const bits = versionBits();
+        for (let i = 0; i < 18; i += 1) {
+          matrix[Math.floor(i / 3)][size - 11 + (i % 3)] = bit(bits, i);
+          matrix[size - 11 + (i % 3)][Math.floor(i / 3)] = bit(bits, i);
+        }
+      };
+      const maskAt = (mask, x, y) => [
+        (x + y) % 2 === 0,
+        y % 2 === 0,
+        x % 3 === 0,
+        (x + y) % 3 === 0,
+        (Math.floor(y / 2) + Math.floor(x / 3)) % 2 === 0,
+        ((x * y) % 2) + ((x * y) % 3) === 0,
+        (((x * y) % 2) + ((x * y) % 3)) % 2 === 0,
+        (((x + y) % 2) + ((x * y) % 3)) % 2 === 0
+      ][mask];
+      const penalty = (matrix) => {
+        let score = 0;
+        const scan = (line) => {
+          let runColor = line[0];
+          let runLength = 1;
+          for (let i = 1; i <= line.length; i += 1) {
+            if (i < line.length && line[i] === runColor) {
+              runLength += 1;
+            } else {
+              if (runLength >= 5) score += runLength - 2;
+              runColor = line[i];
+              runLength = 1;
+            }
+          }
+          const patterns = ["10111010000", "00001011101"];
+          const compact = line.map(Number).join("");
+          patterns.forEach((pattern) => {
+            for (let i = 0; i <= compact.length - pattern.length; i += 1) {
+              if (compact.slice(i, i + pattern.length) === pattern) score += 40;
+            }
+          });
+        };
+        for (let y = 0; y < size; y += 1) scan(matrix[y]);
+        for (let x = 0; x < size; x += 1) scan(matrix.map((row) => row[x]));
+        for (let y = 0; y < size - 1; y += 1) {
+          for (let x = 0; x < size - 1; x += 1) {
+            const color = matrix[y][x];
+            if (matrix[y][x + 1] === color && matrix[y + 1][x] === color && matrix[y + 1][x + 1] === color) {
+              score += 3;
+            }
+          }
+        }
+        const dark = matrix.flat().filter(Boolean).length;
+        score += Math.floor(Math.abs(dark * 20 - size * size * 10) / (size * size)) * 10;
+        return score;
+      };
+
+      let bestMatrix = null;
+      let bestScore = Infinity;
+      for (let mask = 0; mask < 8; mask += 1) {
+        const matrix = modules.map((row) => row.slice());
+        for (let y = 0; y < size; y += 1) {
+          for (let x = 0; x < size; x += 1) {
+            if (!reserved[y][x] && maskAt(mask, x, y)) matrix[y][x] = !matrix[y][x];
+          }
+        }
+        placeFormat(matrix, mask);
+        placeVersion(matrix);
+        const score = penalty(matrix);
+        if (score < bestScore) {
+          bestScore = score;
+          bestMatrix = matrix;
+        }
+      }
+
+      const quiet = 4;
+      const cell = 5;
+      const canvas = document.createElement("canvas");
+      canvas.width = (size + quiet * 2) * cell;
+      canvas.height = canvas.width;
+      canvas.setAttribute("aria-label", "رمز QR لرابط الصفحة الحالي");
+      const context = canvas.getContext("2d");
+      context.fillStyle = "#FFFFFF";
+      context.fillRect(0, 0, canvas.width, canvas.height);
+      context.fillStyle = "#080B12";
+      bestMatrix.forEach((row, y) => {
+        row.forEach((dark, x) => {
+          if (dark) context.fillRect((x + quiet) * cell, (y + quiet) * cell, cell, cell);
+        });
+      });
+      container.innerHTML = "";
+      container.appendChild(canvas);
+    }
+
+    window.addEventListener("DOMContentLoaded", () => {
+      const qrNode = document.getElementById("qrcode");
+      if (window.QRCode) {
+        new QRCode(qrNode, {
+          text: window.location.href,
+          width: 156,
+          height: 156,
+          colorDark: "#080B12",
+          colorLight: "#FFFFFF",
+          correctLevel: QRCode.CorrectLevel.H
+        });
+      } else {
+        renderFallbackQr(qrNode, window.location.href);
+      }
+    });
+  </script>
+</body>
+</html>
